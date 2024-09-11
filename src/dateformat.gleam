@@ -1,5 +1,6 @@
-import birl.{type Time, Day, TimeOfDay}
+import birl.{type Time}
 
+import day
 import gleam/int
 import gleam/io
 import gleam/list
@@ -11,11 +12,9 @@ import gleam/string_builder
 import month
 import util
 
-const micro_in_day = 86_400_000_000
-
 pub fn main() {
   io.println("Hello from dateformat!")
-  io.debug(format("Do-Mo-yyyy [dd-MM-yyyy] DDDo", birl.now()))
+  io.debug(format("E Do-Mo-yyyy [dd-MM-yyyy] DDDo", birl.now()))
 }
 
 pub fn format(fmt: String, time: Time) -> Result(String, Nil) {
@@ -26,7 +25,9 @@ pub fn format(fmt: String, time: Time) -> Result(String, Nil) {
 
 pub fn compile_format(fmt: String) -> Result(fn(Time) -> String, Nil) {
   let assert Ok(regex) =
-    regex.from_string("\\[([^\\[]*)\\]|(?:Mo|M{1,4}|DDDo|Do|D{1,4}|.)")
+    regex.from_string(
+      "\\[([^\\[]*)\\]|(?:Mo|M{1,4}|DDDo|Do|D{1,4}|do|d{1,4}|E|.)",
+    )
   use fmts <- result.try(
     regex.scan(regex, fmt)
     |> list.try_map(parse_match),
@@ -44,13 +45,21 @@ fn run_format(fmts: List(fn(Time) -> String), time: Time) -> String {
 
 fn parse_match(match: Match) -> Result(fn(Time) -> String, Nil) {
   case match.content {
+    "E" -> Ok(fn(t) { t |> day.day_of_week(True) |> int.to_string })
+    "d" -> Ok(fn(t) { t |> day.day_of_week(False) |> int.to_string })
+    "do" -> Ok(fn(t) { t |> day.day_of_week(False) |> util.to_ordinal })
+    "dd" -> Ok(fn(t) { t |> day.to_weekday_shorter_string })
+    "ddd" -> Ok(fn(t) { t |> day.to_weekday_short_string })
+    "dddd" -> Ok(fn(t) { t |> day.to_weekday_string })
     "D" -> Ok(fn(t) { t |> date |> int.to_string })
     "Do" -> Ok(fn(t) { t |> date |> util.to_ordinal })
     "DD" -> Ok(fn(t) { t |> date |> int.to_string |> string.pad_left(2, "0") })
-    "DDD" -> Ok(fn(t) { t |> day_of_year |> int.to_string })
-    "DDDo" -> Ok(fn(t) { t |> day_of_year |> util.to_ordinal })
+    "DDD" -> Ok(fn(t) { t |> day.day_of_year |> int.to_string })
+    "DDDo" -> Ok(fn(t) { t |> day.day_of_year |> util.to_ordinal })
     "DDDD" ->
-      Ok(fn(t) { t |> day_of_year |> int.to_string |> string.pad_left(2, "0") })
+      Ok(fn(t) {
+        t |> day.day_of_year |> int.to_string |> string.pad_left(2, "0")
+      })
 
     "M" -> Ok(fn(t) { t |> birl.month |> month.get_month_num |> int.to_string })
     "MM" ->
@@ -92,18 +101,4 @@ fn parse_match(match: Match) -> Result(fn(Time) -> String, Nil) {
 fn date(time: Time) -> Int {
   let day = time |> birl.get_day
   day.date
-}
-
-fn day_of_year(t2: Time) -> Int {
-  let time = TimeOfDay(0, 0, 0, 0)
-  let t2 = t2 |> birl.set_time_of_day(time)
-  let day = t2 |> birl.get_day
-  let t1 =
-    t2
-    |> birl.set_day(Day(year: day.year, month: 1, date: 1))
-    |> birl.set_time_of_day(time)
-
-  let duration_micro =
-    { t2 |> birl.to_unix_micro } - { t1 |> birl.to_unix_micro }
-  1 + duration_micro / micro_in_day
 }
