@@ -1,4 +1,6 @@
 import birl.{type Time, Day, Fri, Mon, Sat, Sun, Thu, TimeOfDay, Tue, Wed}
+import gleam/float
+import gleam/int
 
 const micro_in_day = 86_400_000_000
 
@@ -29,6 +31,28 @@ pub fn day_of_year(t2: Time) -> Int {
   let duration_micro =
     { t2 |> birl.to_unix_micro } - { t1 |> birl.to_unix_micro }
   1 + duration_micro / micro_in_day
+}
+
+@internal
+pub fn iso_week_of_year(t: Time) -> Int {
+  let day_num = { day_of_week(t, False) + 6 } % 7
+  let day = birl.get_day(t)
+  let t = birl.set_day(t, Day(..day, date: day.date - day_num + 3))
+  let first_thursday = birl.to_unix_micro(t)
+  let t = birl.set_day(t, Day(..birl.get_day(t), month: 1, date: 1))
+  let t = case day_of_week(t, False) {
+    4 -> t
+    d -> {
+      birl.set_day(
+        t,
+        Day(..birl.get_day(t), month: 1, date: 1 + { { 4 - d } + 7 } % 7),
+      )
+    }
+  }
+  1
+  + float.truncate(float.ceiling(
+    int.to_float(first_thursday - birl.to_unix_micro(t)) /. 604_800_000_000.0,
+  ))
 }
 
 @internal
