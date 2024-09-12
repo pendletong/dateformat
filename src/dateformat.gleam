@@ -87,6 +87,10 @@ pub fn main() {
       |> result.unwrap(""),
     )
   })
+  birl.parse("20120214T15:30:17.123+00:00")
+  |> result.unwrap(birl.now())
+  |> birl.get_offset
+  |> io.debug
 }
 
 // Formats the given Time using the specified format
@@ -125,7 +129,13 @@ fn run_format(fmts: List(fn(Time) -> String), time: Time) -> String {
 fn parse_match(match: Match) -> Result(fn(Time) -> String, Nil) {
   case match.content {
     // Time Zone + Offsets
-    "Z" -> Ok(fn(t) { t |> birl.get_offset })
+    "Z" ->
+      Ok(fn(t) {
+        case t |> birl.get_offset {
+          "Z" -> "+00:00"
+          z -> z
+        }
+      })
     "z" -> Ok(fn(t) { t |> birl.get_timezone |> option.unwrap("") })
 
     // Unix timestamps

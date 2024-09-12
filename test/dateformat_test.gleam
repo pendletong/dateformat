@@ -44,6 +44,17 @@ pub fn milliseconds_test() {
   |> birdie.snap(title: "Milliseconds")
 }
 
+pub fn timezone_test() {
+  let assert Ok(t1) = birl.parse("20120214T15:30:17.786+01:00")
+  let assert Ok(t2) = birl.parse("20120214T15:30:17.123-05:00")
+  let assert Ok(t3) = birl.parse("20120214T15:30:17.123+00:00")
+  let assert Ok(t4) = birl.parse("20120214T15:30:17.123+00:00")
+  let assert Ok(t4) = t4 |> birl.set_timezone("Europe/Dublin")
+
+  run_tests([#("Z", " - Timezone"), #("z", " - Region")], [t1, t2, t3, t4])
+  |> birdie.snap(title: "Timezone")
+}
+
 fn run_tests(list: List(#(String, String)), times: List(Time)) -> String {
   list
   |> list.fold([], fn(acc, tst) {

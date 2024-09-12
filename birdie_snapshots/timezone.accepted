@@ -1,0 +1,14 @@
+---
+version: 1.2.3
+title: Timezone
+file: ./test/dateformat_test.gleam
+test_name: timezone_test
+---
++01:00 - Timezone
+-05:00 - Timezone
++00:00 - Timezone
++01:00 - Timezone
+ - Region
+ - Region
+ - Region
+Europe/Dublin - Region
