@@ -94,21 +94,25 @@ pub fn main() {
   birl.from_unix_milli(1_234_567_890_123)
   |> birl.to_iso8601
   |> io.debug
+
+  let t = birl.from_unix_milli(1_234_567_890_123)
+
+  format("DD-MMM-YYYY HH:mm", t) |> io.debug
 }
 
-// Formats the given Time using the specified format
-// Can return error if the format doesn't parse successfully
-//
+/// Formats the given Time using the specified format
+/// Can return error if the format doesn't parse successfully
+///
 pub fn format(fmt: String, time: Time) -> Result(String, Nil) {
   use cmp_fmt <- result.try(compile_format(fmt))
 
   Ok(cmp_fmt(time))
 }
 
-// Generates a function that can then be used to format
-// given Time records
-// Can return error if the format doesn't parse successfully
-//
+/// Generates a function that can then be used to format
+/// given Time records
+/// Can return error if the format doesn't parse successfully
+///
 pub fn compile_format(fmt: String) -> Result(fn(Time) -> String, Nil) {
   let assert Ok(regex) =
     regex.from_string(
