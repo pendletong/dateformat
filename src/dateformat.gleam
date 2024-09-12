@@ -224,9 +224,6 @@ fn parse_match(match: Match) -> Result(fn(Time) -> String, Nil) {
         t |> day.to_iso_week_of_year |> int.to_string |> string.pad_left(2, "0")
       })
     "Wo" -> Ok(fn(t) { t |> day.to_iso_week_of_year |> util.to_ordinal })
-    "w" -> todo
-    "ww" -> todo
-    "wo" -> todo
 
     // Day
     "E" -> Ok(fn(t) { t |> day.to_day_of_week(True) |> int.to_string })
