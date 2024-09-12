@@ -43,6 +43,10 @@
 //// |                        | Qo        | 1st - 4th                      |
 //// | **Year**               | YY        | 70 - 69                        |
 //// |                        | YYYY      | 1970 - 2069                    |
+////
+//// Other characters are just output as is
+//// Characters contained with [...] will be output without formats
+//// 
 
 import birl.{type Time}
 import birl/duration
@@ -101,7 +105,7 @@ pub fn format(fmt: String, time: Time) -> Result(String, Nil) {
 pub fn compile_format(fmt: String) -> Result(fn(Time) -> String, Nil) {
   let assert Ok(regex) =
     regex.from_string(
-      "\\[([^\\[]*)\\]|(?:Mo|M{1,4}|DDDo|Do|D{1,4}|do|d{1,4}|E|wo|w{1,2}|Wo|W{1,2}|Qo|Q|YYYY|YY|HH|H|hh|h|mm|m|ss|s|SSS|SS|S|X|x|z|Z|.)",
+      "\\[([^\\]]*)\\]|(?:Mo|M{1,4}|DDDo|Do|D{1,4}|do|d{1,4}|E|wo|w{1,2}|Wo|W{1,2}|Qo|Q|YYYY|YY|HH|H|hh|h|mm|m|ss|s|SSS|SS|S|X|x|z|Z|.)",
     )
   use fmts <- result.try(
     regex.scan(regex, fmt)

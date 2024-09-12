@@ -1,0 +1,11 @@
+---
+version: 1.2.3
+title: Brackets
+file: ./test/dateformat_test.gleam
+test_name: bracket_test
+---
+MM - Brackets
+MM 12 YY - Multiple brackets
+[02 - Unclosed Brackets
+[MM] - Double Brackets
+[ - Escaped Open Bracket
