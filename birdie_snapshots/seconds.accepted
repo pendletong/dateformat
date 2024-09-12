@@ -1,0 +1,14 @@
+---
+version: 1.2.3
+title: Seconds
+file: ./test/dateformat_test.gleam
+test_name: seconds_test
+---
+17 - Padded Seconds
+17 - Seconds
+07 - Padded Seconds
+7 - Seconds
+59 - Padded Seconds
+59 - Seconds
+00 - Padded Seconds
+0 - Seconds

@@ -158,6 +158,68 @@ pub fn quarter_test() {
   |> birdie.snap(title: "Quarters")
 }
 
+pub fn hoursminutes_test() {
+  let assert Ok(t1) = birl.parse("20120214T12:30:17.123+01:00")
+  let assert Ok(t2) = birl.parse("20120214T01:30:17.123+01:00")
+  let assert Ok(t3) = birl.parse("20120214T13:30:17.123+01:00")
+  let assert Ok(t4) = birl.parse("20120214T07:30:17.123+01:00")
+
+  run_tests(
+    [
+      #("HHmm", " - Padded 24hr"),
+      #("Hmm", " - 24hr"),
+      #("hhmm", " - Padded 12hr"),
+      #("hmm", " - 12hr"),
+    ],
+    [t1, t2, t3, t4],
+  )
+  |> birdie.snap(title: "Hours and Minutes")
+}
+
+pub fn day_period_test() {
+  let assert Ok(t1) = birl.parse("20120214T12:30:17.123+01:00")
+  let assert Ok(t2) = birl.parse("20120214T01:30:17.123+01:00")
+  let assert Ok(t3) = birl.parse("20120214T13:30:17.123+01:00")
+  let assert Ok(t4) = birl.parse("20120214T07:30:17.123+01:00")
+
+  run_tests([#("A", " - Period (caps)"), #("a", " - Period")], [t1, t2, t3, t4])
+  |> birdie.snap(title: "Day Period")
+}
+
+pub fn seconds_test() {
+  let assert Ok(t1) = birl.parse("20120214T12:30:17.123+01:00")
+  let assert Ok(t2) = birl.parse("20120214T01:30:07.123+01:00")
+  let assert Ok(t3) = birl.parse("20120214T13:30:59.123+01:00")
+  let assert Ok(t4) = birl.parse("20120214T07:30:00.123+01:00")
+
+  run_tests([#("ss", " - Padded Seconds"), #("s", " - Seconds")], [
+    t1,
+    t2,
+    t3,
+    t4,
+  ])
+  |> birdie.snap(title: "Seconds")
+}
+
+pub fn large_test() {
+  let assert Ok(t1) = birl.parse("20120214T12:30:17.123+01:00")
+  let assert Ok(t2) = birl.parse("20121212T01:30:07.123+01:00")
+  let assert Ok(t3) = birl.parse("20120921T13:30:59.123+01:00")
+  let assert Ok(t4) = birl.parse("20120304T07:30:00.123+01:00")
+  let assert Ok(t4) = t4 |> birl.set_timezone("Europe/Dublin")
+
+  run_tests(
+    [
+      #(
+        "HHHhhhmmmsssSSSSSSAaZzXxdddd ddd dd dodEDDDDDoDDD DD DoDWWWoWMMMM MMM MoMM MQoQYYYYYY",
+        " - Large Test",
+      ),
+    ],
+    [t1, t2, t3, t4],
+  )
+  |> birdie.snap(title: "Large Tests")
+}
+
 fn run_tests(list: List(#(String, String)), times: List(Time)) -> String {
   times
   |> list.fold([], fn(acc, time) {

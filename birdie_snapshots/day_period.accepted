@@ -1,0 +1,14 @@
+---
+version: 1.2.3
+title: Day Period
+file: ./test/dateformat_test.gleam
+test_name: day_period_test
+---
+PM - Period (caps)
+pm - Period
+AM - Period (caps)
+am - Period
+PM - Period (caps)
+pm - Period
+AM - Period (caps)
+am - Period

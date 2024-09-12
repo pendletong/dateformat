@@ -1,0 +1,22 @@
+---
+version: 1.2.3
+title: Hours and Minutes
+file: ./test/dateformat_test.gleam
+test_name: hoursminutes_test
+---
+1230 - Padded 24hr
+1230 - 24hr
+1230 - Padded 12hr
+1230 - 12hr
+0130 - Padded 24hr
+130 - 24hr
+0130 - Padded 12hr
+130 - 12hr
+1330 - Padded 24hr
+1330 - 24hr
+0130 - Padded 12hr
+130 - 12hr
+0730 - Padded 24hr
+730 - 24hr
+0730 - Padded 12hr
+730 - 12hr
