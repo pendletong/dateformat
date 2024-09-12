@@ -4,8 +4,7 @@ import gleam/int
 
 const micro_in_day = 86_400_000_000
 
-@internal
-pub fn day_of_week(time: Time, iso: Bool) -> Int {
+pub fn to_day_of_week(time: Time, iso: Bool) -> Int {
   case birl.weekday(time), iso {
     Mon, _ -> 1
     Tue, _ -> 2
@@ -18,8 +17,7 @@ pub fn day_of_week(time: Time, iso: Bool) -> Int {
   }
 }
 
-@internal
-pub fn day_of_year(t2: Time) -> Int {
+pub fn to_day_of_year(t2: Time) -> Int {
   let time = TimeOfDay(0, 0, 0, 0)
   let t2 = t2 |> birl.set_time_of_day(time)
   let day = t2 |> birl.get_day
@@ -33,14 +31,13 @@ pub fn day_of_year(t2: Time) -> Int {
   1 + duration_micro / micro_in_day
 }
 
-@internal
-pub fn iso_week_of_year(t: Time) -> Int {
-  let day_num = { day_of_week(t, False) + 6 } % 7
+pub fn to_iso_week_of_year(t: Time) -> Int {
+  let day_num = { to_day_of_week(t, False) + 6 } % 7
   let day = birl.get_day(t)
   let t = birl.set_day(t, Day(..day, date: day.date - day_num + 3))
   let first_thursday = birl.to_unix_micro(t)
   let t = birl.set_day(t, Day(..birl.get_day(t), month: 1, date: 1))
-  let t = case day_of_week(t, False) {
+  let t = case to_day_of_week(t, False) {
     4 -> t
     d -> {
       birl.set_day(
@@ -55,7 +52,6 @@ pub fn iso_week_of_year(t: Time) -> Int {
   ))
 }
 
-@internal
 pub fn to_weekday_string(time: Time) -> String {
   case birl.weekday(time) {
     Mon -> "Monday"
@@ -68,7 +64,6 @@ pub fn to_weekday_string(time: Time) -> String {
   }
 }
 
-@internal
 pub fn to_weekday_short_string(time: Time) -> String {
   case birl.weekday(time) {
     Mon -> "Mon"
@@ -81,7 +76,6 @@ pub fn to_weekday_short_string(time: Time) -> String {
   }
 }
 
-@internal
 pub fn to_weekday_shorter_string(time: Time) -> String {
   case birl.weekday(time) {
     Mon -> "Mo"

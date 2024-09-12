@@ -2,10 +2,9 @@ import birl.{
   type Month, Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep,
 }
 
-import util
+import dateformat/internal/util
 
-@internal
-pub fn get_month_num(month: Month) -> Int {
+pub fn to_month_num(month: Month) -> Int {
   case month {
     Jan -> 1
     Feb -> 2
@@ -22,8 +21,7 @@ pub fn get_month_num(month: Month) -> Int {
   }
 }
 
-@internal
-pub fn get_short_month(month: Month) -> String {
+pub fn to_short_month(month: Month) -> String {
   // todo internationalisation
   case month {
     Jan -> "Jan"
@@ -41,15 +39,13 @@ pub fn get_short_month(month: Month) -> String {
   }
 }
 
-@internal
-pub fn get_ordinal_month(month: Month) -> String {
+pub fn to_ordinal_month(month: Month) -> String {
   // todo internationalisation
-  let month_num = get_month_num(month)
+  let month_num = to_month_num(month)
   util.to_ordinal(month_num)
 }
 
-@internal
-pub fn get_month(month: Month) -> String {
+pub fn to_long_month(month: Month) -> String {
   // todo internationalisation
   case month {
     Jan -> "January"
