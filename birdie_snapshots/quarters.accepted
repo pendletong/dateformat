@@ -1,0 +1,27 @@
+---
+version: 1.2.3
+title: Quarters
+file: ./test/dateformat_test.gleam
+test_name: quarter_test
+---
+1 - Quarter
+Q1-1985 - Quarter Pretty
+1st - Quarter Ordinal
+3 - Quarter
+Q3-2029 - Quarter Pretty
+3rd - Quarter Ordinal
+2 - Quarter
+Q2-2013 - Quarter Pretty
+2nd - Quarter Ordinal
+1 - Quarter
+Q1-2015 - Quarter Pretty
+1st - Quarter Ordinal
+1 - Quarter
+Q1-1970 - Quarter Pretty
+1st - Quarter Ordinal
+4 - Quarter
+Q4-2001 - Quarter Pretty
+4th - Quarter Ordinal
+1 - Quarter
+Q1-2000 - Quarter Pretty
+1st - Quarter Ordinal

@@ -205,11 +205,11 @@ fn parse_match(match: Match) -> Result(fn(Time) -> String, Nil) {
     // Quarter
     "Q" ->
       Ok(fn(t) {
-        { { t |> birl.month |> month.to_month_num } + 3 } / 4 |> int.to_string
+        { t |> birl.month |> month.to_month_num } / 4 + 1 |> int.to_string
       })
     "Qo" ->
       Ok(fn(t) {
-        { { t |> birl.month |> month.to_month_num } + 3 } / 4
+        { t |> birl.month |> month.to_month_num } / 4 + 1
         |> util.to_ordinal
       })
 

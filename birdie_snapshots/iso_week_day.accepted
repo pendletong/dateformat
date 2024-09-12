@@ -1,0 +1,13 @@
+---
+version: 1.2.3
+title: ISO Week Day
+file: ./test/dateformat_test.gleam
+test_name: iso_weekday_test
+---
+1 - ISO Weekday
+2 - ISO Weekday
+3 - ISO Weekday
+4 - ISO Weekday
+5 - ISO Weekday
+6 - ISO Weekday
+7 - ISO Weekday

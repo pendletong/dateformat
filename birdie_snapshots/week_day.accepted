@@ -1,0 +1,41 @@
+---
+version: 1.2.3
+title: Week Day
+file: ./test/dateformat_test.gleam
+test_name: weekday_test
+---
+1 - Weekday number
+1st - Weekday ordinal
+Mo - Weekday Shorter
+Mon - Weekday Short
+Monday - Weekday Long
+2 - Weekday number
+2nd - Weekday ordinal
+Tu - Weekday Shorter
+Tue - Weekday Short
+Tuesday - Weekday Long
+3 - Weekday number
+3rd - Weekday ordinal
+We - Weekday Shorter
+Wed - Weekday Short
+Wednesday - Weekday Long
+4 - Weekday number
+4th - Weekday ordinal
+Th - Weekday Shorter
+Thu - Weekday Short
+Thursday - Weekday Long
+5 - Weekday number
+5th - Weekday ordinal
+Fr - Weekday Shorter
+Fri - Weekday Short
+Friday - Weekday Long
+6 - Weekday number
+6th - Weekday ordinal
+Sa - Weekday Shorter
+Sat - Weekday Short
+Saturday - Weekday Long
+0 - Weekday number
+0th - Weekday ordinal
+Su - Weekday Shorter
+Sun - Weekday Short
+Sunday - Weekday Long

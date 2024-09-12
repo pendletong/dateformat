@@ -103,6 +103,61 @@ pub fn week_test() {
   |> birdie.snap(title: "Week of Year")
 }
 
+pub fn iso_weekday_test() {
+  let assert Ok(t1) = birl.parse("19850204T00:00:00.000+00:00")
+  let assert Ok(t2) = birl.parse("20290918T00:00:00.000+00:00")
+  let assert Ok(t3) = birl.parse("20130424T00:00:00.000+00:00")
+  let assert Ok(t4) = birl.parse("20150305T00:00:00.000+00:00")
+  let assert Ok(t5) = birl.parse("19700102T00:00:00.000+00:00")
+  let assert Ok(t6) = birl.parse("20010512T00:00:00.000+00:00")
+  let assert Ok(t7) = birl.parse("20000102T00:00:00.000+00:00")
+
+  run_tests([#("E", " - ISO Weekday")], [t1, t2, t3, t4, t5, t6, t7])
+  |> birdie.snap(title: "ISO Week Day")
+}
+
+pub fn weekday_test() {
+  let assert Ok(t1) = birl.parse("19850204T00:00:00.000+00:00")
+  let assert Ok(t2) = birl.parse("20290918T00:00:00.000+00:00")
+  let assert Ok(t3) = birl.parse("20130424T00:00:00.000+00:00")
+  let assert Ok(t4) = birl.parse("20150305T00:00:00.000+00:00")
+  let assert Ok(t5) = birl.parse("19700102T00:00:00.000+00:00")
+  let assert Ok(t6) = birl.parse("20010512T00:00:00.000+00:00")
+  let assert Ok(t7) = birl.parse("20000102T00:00:00.000+00:00")
+
+  run_tests(
+    [
+      #("d", " - Weekday number"),
+      #("do", " - Weekday ordinal"),
+      #("dd", " - Weekday Shorter"),
+      #("ddd", " - Weekday Short"),
+      #("dddd", " - Weekday Long"),
+    ],
+    [t1, t2, t3, t4, t5, t6, t7],
+  )
+  |> birdie.snap(title: "Week Day")
+}
+
+pub fn quarter_test() {
+  let assert Ok(t1) = birl.parse("19850204T00:00:00.000+00:00")
+  let assert Ok(t2) = birl.parse("20290918T00:00:00.000+00:00")
+  let assert Ok(t3) = birl.parse("20130424T00:00:00.000+00:00")
+  let assert Ok(t4) = birl.parse("20150305T00:00:00.000+00:00")
+  let assert Ok(t5) = birl.parse("19700102T00:00:00.000+00:00")
+  let assert Ok(t6) = birl.parse("20011212T00:00:00.000+00:00")
+  let assert Ok(t7) = birl.parse("20000102T00:00:00.000+00:00")
+
+  run_tests(
+    [
+      #("Q", " - Quarter"),
+      #("[Q]Q-YYYY", " - Quarter Pretty"),
+      #("Qo", " - Quarter Ordinal"),
+    ],
+    [t1, t2, t3, t4, t5, t6, t7],
+  )
+  |> birdie.snap(title: "Quarters")
+}
+
 fn run_tests(list: List(#(String, String)), times: List(Time)) -> String {
   times
   |> list.fold([], fn(acc, time) {
