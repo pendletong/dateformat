@@ -5,10 +5,10 @@ file: ./test/dateformat_test.gleam
 test_name: timezone_test
 ---
 +01:00 - Timezone
+ - Region
 -05:00 - Timezone
+ - Region
 +00:00 - Timezone
+ - Region
 +01:00 - Timezone
- - Region
- - Region
- - Region
 Europe/Dublin - Region

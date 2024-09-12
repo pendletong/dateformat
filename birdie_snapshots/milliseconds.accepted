@@ -4,9 +4,9 @@ title: Milliseconds
 file: ./test/dateformat_test.gleam
 test_name: milliseconds_test
 ---
-007 - /10 second
-001 - /10 second
+7 - /10 second
 78 - /100 second
-12 - /100 second
 786 - millisecond
+1 - /10 second
+12 - /100 second
 123 - millisecond

@@ -1,0 +1,57 @@
+---
+version: 1.2.3
+title: Week of Year
+file: ./test/dateformat_test.gleam
+test_name: week_test
+---
+53 - Padded Week of Year
+53 - Week of Year
+53rd - Ordinal Week of Year
+52 - Padded Week of Year
+52 - Week of Year
+52nd - Ordinal Week of Year
+01 - Padded Week of Year
+1 - Week of Year
+1st - Ordinal Week of Year
+52 - Padded Week of Year
+52 - Week of Year
+52nd - Ordinal Week of Year
+01 - Padded Week of Year
+1 - Week of Year
+1st - Ordinal Week of Year
+01 - Padded Week of Year
+1 - Week of Year
+1st - Ordinal Week of Year
+52 - Padded Week of Year
+52 - Week of Year
+52nd - Ordinal Week of Year
+01 - Padded Week of Year
+1 - Week of Year
+1st - Ordinal Week of Year
+01 - Padded Week of Year
+1 - Week of Year
+1st - Ordinal Week of Year
+01 - Padded Week of Year
+1 - Week of Year
+1st - Ordinal Week of Year
+01 - Padded Week of Year
+1 - Week of Year
+1st - Ordinal Week of Year
+53 - Padded Week of Year
+53 - Week of Year
+53rd - Ordinal Week of Year
+53 - Padded Week of Year
+53 - Week of Year
+53rd - Ordinal Week of Year
+53 - Padded Week of Year
+53 - Week of Year
+53rd - Ordinal Week of Year
+53 - Padded Week of Year
+53 - Week of Year
+53rd - Ordinal Week of Year
+53 - Padded Week of Year
+53 - Week of Year
+53rd - Ordinal Week of Year
+52 - Padded Week of Year
+52 - Week of Year
+52nd - Ordinal Week of Year

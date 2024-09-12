@@ -91,6 +91,9 @@ pub fn main() {
   |> result.unwrap(birl.now())
   |> birl.get_offset
   |> io.debug
+  birl.from_unix_milli(1_234_567_890_123)
+  |> birl.to_iso8601
+  |> io.debug
 }
 
 // Formats the given Time using the specified format
@@ -193,7 +196,6 @@ fn parse_match(match: Match) -> Result(fn(Time) -> String, Nil) {
       Ok(fn(t) {
         { t |> time.to_milli_of_second } / 100
         |> int.to_string
-        |> string.pad_left(3, "0")
       })
 
     // Year

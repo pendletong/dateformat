@@ -1,0 +1,11 @@
+---
+version: 1.2.3
+title: UNIX Timestamp
+file: ./test/dateformat_test.gleam
+test_name: unix_timestamp_test
+---
+1234567890 - Timestamp
+1234567890.1 - Timestamp with /10 seconds
+1234567890.12 - Timestamp with /100 seconds
+1234567890.123 - Timestamp with milliseconds
+1234567890123 - Timestamp with millseconds
